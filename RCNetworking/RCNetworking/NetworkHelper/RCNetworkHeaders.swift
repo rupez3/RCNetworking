@@ -1,23 +1,35 @@
 //
-//  HTTPHeader.swift
+//  RCNetworkHeaders.swift
 //  RCNetworking
 //
-//  Created by Rupesh Chhetri on 6/23/20.
+//  Created by Rupesh Chhetri on 6/29/20.
 //  Copyright © 2020 com.home.rupesh. All rights reserved.
 //
 
 import Foundation
 
 public typealias HTTPHeaders = [String:String]
+public typealias QueryParams = [String: String]
+public typealias BodyParams = [String: Any?]
 
 public struct HTTPHeader: Hashable {
     let key: HTTPHeaderKey
     let value: HTTPHeaderValue
 }
 
+public struct QueryParam {
+    let key: String
+    let value: String
+}
+
+public struct BodyParam {
+    let key: String
+    let value: Any?
+}
+
 /// Pre-typed strings for use with formatting headers
 public enum HTTPHeaderKey: Hashable {
-   
+
     public enum CommonKey: String, Hashable {
         case accept = "Accept"
         case acceptEncoding = "Accept-Encoding"
@@ -48,8 +60,35 @@ public enum HTTPHeaderKey: Hashable {
         case cookie = "Cookie"
         case expect = "Expect"
     }
+    
+    public enum CustomKey: String, Hashable {
+        case version = "X-Version"
+        case callRef = "X-callref"
+        case iosVersion = "X-ios-version"
+        case appVersion = "X-app-version"
+        case isVirtualTech = "X-is-virtual-tech"
+        case scheduleDate = "X-ScheduleDate"
+        case jobId = "X-JobId"
+        case accountNumber = "X-AccountNumber"
+        case woNumber = "X-WorkOrderNumber"
+        case jobClassId = "X-JobClassCd"
+        case sessionToken = "session_token"
+        case pageName = "X-PageName"
+        case isAccountView = "X-isAccountView"
+    }
+    
     case commonKey(key: CommonKey)
+    case customKey(key: CustomKey)
     case other(key: String)
+    
+    var name: String {
+        switch self {
+        case .commonKey(key: let x): return x.rawValue
+        case .customKey(key: let y): return y.rawValue
+        case .other(key: let z): return z
+        }
+    }
+    
 }
 
 public enum HTTPHeaderValue: Hashable {
@@ -92,5 +131,12 @@ public enum HTTPHeaderValue: Hashable {
     
     case contentType(type: CommonContentType)
     case other(value: String)
+    
+    var name: String {
+        switch self {
+        case .contentType(type: let x): return x.rawValue
+        case .other(value: let y): return y
+        }
+    }
     
 }

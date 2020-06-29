@@ -8,12 +8,12 @@
 
 import Foundation
 
-class NetworkLogger {
+class CCNetworkLogger {
     
     static func log(request: URLRequest) {
         
         print("\n - - - - - - - - - - OUTGOING - - - - - - - - - - \n")
-        defer { print("\n - - - - - - - - - -  END - - - - - - - - - - \n") }
+        defer { print("\n - - - - - - - - - - OUTGOING END - - - - - - - - - - - - \n") }
         
         let urlAsString = request.url?.absoluteString ?? ""
         let urlComponents = NSURLComponents(string: urlAsString)
@@ -38,6 +38,11 @@ class NetworkLogger {
         print(logOutput)
     }
     
-    static func log(response: URLResponse) {}
+    static func log(response: URLResponse) {
+        print("\n - - - - - - - - - - INCOMING - - - - - - - - - - \n")
+        print(response)
+        print("\n - - - - - - - - - - INCOMING END - - - - - - - - - - - - \n")
+    }
     
 }
+

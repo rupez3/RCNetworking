@@ -10,7 +10,6 @@ import Foundation
 
 /// Pre-typed strings for use with NetworkRequest.httpMethod (or URLRequest.httpMethod)
 public enum HTTPMethod: String {
-    
     case get        = "GET"
     case post       = "POST"
     case put        = "PUT"
@@ -20,5 +19,5 @@ public enum HTTPMethod: String {
     case trace      = "TRACE"
     case connect    = "CONNECT"
     case options    = "OPTIONS"
-    
 }
+

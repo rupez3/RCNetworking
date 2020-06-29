@@ -16,8 +16,19 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .blue
         
+        //Example Implementation:
+        ConfigurationConsumer(api: .configuration(queryParams: ["configId":"co19"])).loadData { result in
+            switch result {
+            case .success(let data):
+                print(data)
+            case .failure(let error):
+                print(error)
+            case .empty:
+                print("dfaa")
+            }
+        }
+        
     }
-
 
 }
 
